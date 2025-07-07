@@ -1,20 +1,44 @@
-const express = require("express");
+const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const port = 3000;
+const PORT = 3000;
 
-app.set('view engine', 'ejs')
-app.use(bodyParser.urlencoded({extended: true}))
+// Temporary server-side storage
+let submissions = [];
 
-app.use(express.static('public'))
-app.get('/', (req,res)=>{
-    res.render('index')
-})
-app.post('/submit', (req,res)=>{
-    const userData = req.body;
-    res.render('result', {userData})
-})
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
-app.listen(port, ()=>{
-    console.log(`Example app listening on port ${port}`)
-})
+// GET route for form
+app.get('/', (req, res) => {
+    res.render('index');
+});
+
+// POST route for form submission
+app.post('/submit', (req, res) => {
+    const { name, email, age } = req.body;
+
+    // Server-side validation
+    if (!name || !email || !age) {
+        return res.render('result', { message: '❌ Error: All fields are required.' });
+    }
+
+    if (!email.includes('@') || !email.includes('.')) {
+        return res.render('result', { message: '❌ Error: Invalid email format.' });
+    }
+
+    if (parseInt(age) < 18) {
+        return res.render('result', { message: '❌ Error: Age must be at least 18.' });
+    }
+
+    // If validation passed, store data
+    submissions.push({ name, email, age });
+
+    res.render('result', { message: `✅ Success! Thank you, ${name}. Total submissions: ${submissions.length}` });
+});
+
+// Start server
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+});

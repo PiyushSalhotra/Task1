@@ -1,24 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User Form</title>
-    <link rel="stylesheet" href="/style.css">
+    <title>Registration Form</title>
 </head>
-<body>
-    <div class="container">
-        <h1>User Input Form</h1>
-        <form action="/submit" method="POST">
-            <label>Name:</label>
-            <input type="text" name="name" required>
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea, #764ba2, #e16f7c); margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh;">
 
-            <label>Email:</label>
-            <input type="email" name="email" required>
+    <div style="background: linear-gradient(135deg, #f3e7fe, #e3f0ff, #ffe3ec); padding: 35px 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 90%; max-width: 500px; text-align: center;">
 
-             <label>Password:</label>
-            <input type="password" name="password" required>
+        <h1 style="color: #333; margin-bottom: 20px;">User Registration</h1>
 
-            <button type="submit">Submit</button>
+        <form action="/submit" method="POST" onsubmit="return validateForm();">
+            <label for="name" style="text-align: left; display: block; margin-top: 15px; font-weight: bold; color: #555;">Name:</label>
+            <input type="text" name="name" id="name" style="width: 100%; padding: 12px 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 8px; outline: none;">
+
+            <label for="email" style="text-align: left; display: block; margin-top: 15px; font-weight: bold; color: #555;">Email:</label>
+            <input type="email" name="email" id="email" style="width: 100%; padding: 12px 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 8px; outline: none;">
+
+            <label for="age" style="text-align: left; display: block; margin-top: 15px; font-weight: bold; color: #555;">Age:</label>
+            <input type="number" name="age" id="age" style="width: 100%; padding: 12px 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 8px; outline: none;">
+
+            <button type="submit" style="width: 100%; padding: 12px; background-color: #007bff; color: white; border: none; border-radius: 8px; margin-top: 20px; cursor: pointer; font-size: 16px;">Submit</button>
         </form>
+
     </div>
+
+    <script>
+        function validateForm() {
+            var name = document.getElementById('name').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var age = document.getElementById('age').value.trim();
+
+            if (name === '' || email === '' || age === '') {
+                alert('All fields are required!');
+                return false;
+            }
+
+            if (!email.includes('@') || !email.includes('.')) {
+                alert('Invalid email format!');
+                return false;
+            }
+
+            if (parseInt(age) < 18) {
+                alert('Age must be at least 18.');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+
 </body>
 </html>

@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Form Result</title>
-    <link rel="stylesheet" href="/style.css">
+    <title>Form Submission Result</title>
 </head>
-<body>
-    <div class="container result">
-        <h1>Form Submission Received!</h1>
-        <p><strong>Name:</strong> <%= userData.name %></p>
-        <p><strong>Email:</strong> <%= userData.email %></p>
-        <p><strong>Password:</strong> <%= userData.password %></p>
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea, #764ba2, #e16f7c); margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh;">
 
-        <a href="/">Go Back</a>
+    <div style="background: linear-gradient(135deg, #f3e7fe, #e3f0ff, #ffe3ec); padding: 35px 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 90%; max-width: 500px; text-align: center;">
+
+        <h2 style="color: #333; margin-bottom: 20px;">Submission Result</h2>
+
+        <p style="font-size: 18px; color: #444;"><%= message %></p>
+
+        <a href="/" style="display: inline-block; margin-top: 20px; text-decoration: none; color: #007bff; font-weight: bold;">Go Back to Form</a>
+
     </div>
+
 </body>
 </html>
